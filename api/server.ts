@@ -397,19 +397,19 @@ const handler = initializeMcpApiHandler(
       },
       async ({ programId, inputJson, instructionName }) => {
         try {
-          const payerPrivateKey = process.env.PAYER_PRIVATE_KEY;
-          if (!payerPrivateKey) {
-            return {
-              content: [
-                {
-                  type: "text",
-                  text: "No IDL found for the given program ID.",
-                },
-              ],
-            };
-          }
+          // const payerPrivateKey = Keypair.generate().secretKey.toString();
+          // if (!payerPrivateKey) {
+          //   return {
+          //     content: [
+          //       {
+          //         type: "text",
+          //         text: "No IDL found for the given program ID.",
+          //       },
+          //     ],
+          //   };
+          // }
 
-          const secretKey = bs58.decode(payerPrivateKey);
+          const secretKey = Keypair.generate().secretKey
           const payer = Keypair.fromSecretKey(secretKey);
 
           const programPublicKey = new PublicKey(programId);
